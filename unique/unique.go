@@ -1,5 +1,7 @@
 package unique
 
+import "math"
+
 func SimplePseudoEncrypt(val int) int {
 	var l1 int = (val >> 16) & 65535
 	var r1 int = val & 65535
@@ -15,4 +17,14 @@ func SimplePseudoEncrypt(val int) int {
 		i = i + 1
 	}
 	return ((r1 << 16) + l1)
+}
+
+func StaplePseudoEncrypt(val int, len int) int {
+	if len <= 0 {
+		return 0
+	}
+	origin := SimplePseudoEncrypt(val)
+	divisor := int(math.Pow10(len))
+	reminder := origin % divisor
+	return reminder
 }
