@@ -2,12 +2,14 @@ package unique
 
 import (
 	"strconv"
+	"strings"
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestSimplePseudoEncrypt(t *testing.T) {
+
 	Convey("test determinacy", t, func() {
 		input := []int{-3, -2, -1, 0, 1, 2, 3}
 		output1 := []int{}
@@ -30,6 +32,7 @@ func TestSimplePseudoEncrypt(t *testing.T) {
 }
 
 func TestStaplePseudoEncrypt(t *testing.T) {
+
 	Convey("test figures number", t, func() {
 		inputValue := 1
 		inputLenthList := []int{1, 2, 3}
@@ -44,12 +47,31 @@ func TestStaplePseudoEncrypt(t *testing.T) {
 	})
 
 	Convey("test invalid input", t, func() {
+
 		inputValue := 1
 		invalidInputLenthList := []int{-1, 0}
 		errTimes := 0
 		for _, l := range invalidInputLenthList {
 			output := StaplePseudoEncrypt(inputValue, l)
 			if output != 0 {
+				errTimes = errTimes + 1
+			}
+		}
+		So(errTimes, ShouldEqual, 0)
+	})
+}
+
+func TestGenerateFullName(t *testing.T) {
+
+	Convey("test name generate", t, func() {
+		input := []int{1, 2, 3}
+		output := []string{}
+		errTimes := 0
+		for _, i := range input {
+			output = append(output, GenerateFullName(i))
+		}
+		for _, name := range output {
+			if len(strings.Split(name, " ")) != 3 {
 				errTimes = errTimes + 1
 			}
 		}
