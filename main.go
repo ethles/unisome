@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	unqiue "github.com/ethles/unqiue-name/unique"
+	unqiue "github.com/ethles/unisome/unique"
 )
 
 func main() {
-	fmt.Println(unqiue.SimplePseudoEncrypt(2))
+	//
 }
